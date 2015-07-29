@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Fluentd &amp; Fluent Bit | Fluent Bit</title>
+        <title>Serial Interface | Fluent Bit</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 2.1.0">
@@ -25,10 +25,10 @@
         
     
     
-    <link rel="next" href="../about/license.html" />
+    <link rel="next" href="../input/stdin.html" />
     
     
-    <link rel="prev" href="../about/index.html" />
+    <link rel="prev" href="../input/mem.html" />
     
 
         
@@ -36,7 +36,7 @@
     <body>
         
         
-    <div class="book" data-level="1.1" data-basepath=".." data-revision="Wed Jul 29 2015 15:21:15 GMT-0600 (CST)">
+    <div class="book" data-level="3.4" data-basepath=".." data-revision="Wed Jul 29 2015 15:21:15 GMT-0600 (CST)">
     
 
 <div class="book-summary">
@@ -82,7 +82,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.1" data-path="about/fluentd_and_fluentbit.html">
+        <li class="chapter " data-level="1.1" data-path="about/fluentd_and_fluentbit.html">
             
                 
                     <a href="../about/fluentd_and_fluentbit.html">
@@ -229,7 +229,7 @@
             
         </li>
     
-        <li class="chapter " data-level="3.4" data-path="input/serial.html">
+        <li class="chapter active" data-level="3.4" data-path="input/serial.html">
             
                 
                     <a href="../input/serial.html">
@@ -435,57 +435,118 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="fluentd-and-fluent-bit">Fluentd and Fluent Bit</h1>
-<p>Data collection matters and nowadays the scenarios from where the information can <em>come from</em> are very variable. For hence to be more flexible on certain markets needs, we may need different options. On this page we will describe the relationship between the <a href="http://fluentd.org" target="_blank">Fluentd</a> and <a href="http://fluentbit.io" target="_blank">Fluent Bit</a> open source projects.</p>
-<p><a href="http://fluentd.org" target="_blank">Fluentd</a> and <a href="http://fluentbit.io" target="_blank">Fluent Bit</a> projects are both created and sponsored by <a href="http://treasuredata.com" target="_blank">Treasure Data</a> and they aim to solve the data collection needs but on different scenarios and environments, the following table describe a comparisson on different areas of the projects:</p>
+                        <h1 id="serial-interface">Serial Interface</h1>
+<p>The <strong>serial</strong> input plugin, allows to retrieve messages/data from a <em>Serial</em> interface. In order to use this plugin is required to write a simple configuration file before to run <a href="http://fluentbit.io" target="_blank">Fluent Bit</a>.</p>
+<h2 id="configuration-file">Configuration File</h2>
+<p><a href="http://fluentbit.io" target="_blank">Fluent Bit</a> sources distribute an example configuration file for the serial interface and it&apos;s located under <em>conf/serial_input.conf</em>. The plugin recognize the following setup under a <strong>SERIAL</strong> section:</p>
 <table>
 <thead>
 <tr>
-<th></th>
-<th>Fluentd</th>
-<th>Fluent Bit</th>
+<th>Key</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Scope</td>
-<td>Servers</td>
-<td>Embedded &amp; IoT devices</td>
+<td>File</td>
+<td>Absolute path to the device entry, e.g: /dev/ttyS0</td>
 </tr>
 <tr>
-<td>Language</td>
-<td>C &amp; Ruby</td>
-<td>C</td>
-</tr>
-<tr>
-<td>Memory</td>
-<td>~20MB</td>
-<td>~150KB</td>
-</tr>
-<tr>
-<td>Performance</td>
-<td>High Performance</td>
-<td>High Performance</td>
-</tr>
-<tr>
-<td>Dependencies</td>
-<td>Built as a Ruby Gem, it requires a certain number of gems.</td>
-<td>Zero dependencies, unless some special plugin requires them.</td>
-</tr>
-<tr>
-<td>Plugins</td>
-<td>More than 300 plugins available</td>
-<td>Less than 10 plugins available</td>
-</tr>
-<tr>
-<td>License</td>
-<td><a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a></td>
-<td><a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a></td>
+<td>Bitrate</td>
+<td>The bitrate for the communication, e.g: 9600, 38400, 115200, etc</td>
 </tr>
 </tbody>
 </table>
-<p>As described in the table, if the target environment is a server with common capacity, <a href="http://fluentd.org" target="_blank">Fluentd</a> is a great option due to it flexibility and availability of plugins (more than 300 extensions!) but if the <em>data collection</em> will happen in an Embedded environment or an IoT device where the system capacity is restricted, <a href="http://fluentbit.io" target="_blank">Fluent Bit</a> is the solution to use.</p>
-<p>Both tools are not mutual exclusive, <a href="http://fluentbit.io" target="_blank">Fluent Bit</a> provides and <em>output</em> plugin to flush the information to a <a href="http://fluentd.org" target="_blank">Fluentd</a> instance, so they can work together in your architecture or as independent services.</p>
+<p>Here is an example:</p>
+<pre><code class="lang-python">[SERIAL]
+    <span class="hljs-comment"># File</span>
+    <span class="hljs-comment"># ====</span>
+    <span class="hljs-comment"># Filename of serial port. e.g. /dev/ttyS0, /dev/ttyAMA0</span>
+
+    File    /dev/ttyS0
+
+    <span class="hljs-comment"># Bitrate</span>
+    <span class="hljs-comment"># ========</span>
+    <span class="hljs-comment"># Specify the bitrate to communicate using the port.</span>
+
+    Bitrate <span class="hljs-number">9600</span>
+</code></pre>
+<h2 id="running">Running</h2>
+<p>Once the configuration file is in place, collecting data from the <em>Serial</em> interface is very straighforward. Just let <a href="http://fluentbit.io" target="_blank">Fluent Bit</a> know the input/output plugins plus the configuration file location, e.g:</p>
+<pre><code class="lang-bash">$ bin/fluent-bit -c serial.conf -i serial -o stdout -V
+Fluent-Bit v0.<span class="hljs-number">1.0</span>
+Copyright (C) Treasure Data
+
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">12</span>:<span class="hljs-number">39</span>:<span class="hljs-number">37</span>] [ info] Configuration
+flush time     : <span class="hljs-number">5</span> seconds
+input plugins  : serial
+collectors     :
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">12</span>:<span class="hljs-number">39</span>:<span class="hljs-number">37</span>] [ info] starting engine
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">12</span>:<span class="hljs-number">39</span>:<span class="hljs-number">37</span>] [debug] Serial / file=<span class="hljs-string">&apos;/dev/ttyS0&apos;</span> bitrate=<span class="hljs-string">&apos;9600&apos;</span>
+</code></pre>
+<blockquote>
+<p>the -V argument is optional just to print out verbose messages.</p>
+</blockquote>
+<p>Now every message that arrives to the <em>/dev/ttyS0</em> interface will be printed to the standard output:</p>
+<pre><code class="lang-bash">$ bin/fluent-bit -c serial.conf -i serial -o stdout -V
+Fluent-Bit v0.<span class="hljs-number">1.0</span>
+Copyright (C) Treasure Data
+
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">12</span>:<span class="hljs-number">39</span>:<span class="hljs-number">37</span>] [ info] Configuration
+flush time     : <span class="hljs-number">5</span> seconds
+input plugins  : serial
+collectors     :
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">12</span>:<span class="hljs-number">39</span>:<span class="hljs-number">37</span>] [ info] starting engine
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">12</span>:<span class="hljs-number">39</span>:<span class="hljs-number">37</span>] [debug] Serial / file=<span class="hljs-string">&apos;/dev/ttyS0&apos;</span> bitrate=<span class="hljs-string">&apos;9600&apos;</span>
+[<span class="hljs-number">0</span>] [<span class="hljs-number">1438193365</span>, {<span class="hljs-string">&quot;msg&quot;</span>=&gt;<span class="hljs-string">&quot;test1&quot;</span>}]
+[<span class="hljs-number">1</span>] [<span class="hljs-number">1438193366</span>, {<span class="hljs-string">&quot;msg&quot;</span>=&gt;<span class="hljs-string">&quot;test2&quot;</span>}]
+[<span class="hljs-number">2</span>] [<span class="hljs-number">1438193367</span>, {<span class="hljs-string">&quot;msg&quot;</span>=&gt;<span class="hljs-string">&quot;test3&quot;</span>}]
+[<span class="hljs-number">3</span>] [<span class="hljs-number">1438193368</span>, {<span class="hljs-string">&quot;msg&quot;</span>=&gt;<span class="hljs-string">&quot;test4&quot;</span>}]
+</code></pre>
+<h2 id="emulating-serial-interface-on-linux">Emulating Serial Interface on Linux</h2>
+<p>The following content is some extra information that will allow you to emulate a serial interface on your Linux system, so you can test this <em>Serial</em> input plugin locally in case you don&apos;t have such interface in your computer. The following procedure have been tested on Ubuntu 15.04 running a Linux Kernel 4.0.</p>
+<h2 id="build-and-install-the-tty0tty-module">Build and install the tty0tty module</h2>
+<p>Download the sources</p>
+<pre><code class="lang-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/freemed/tty0tty
+</code></pre>
+<p>Unpack and compile</p>
+<pre><code class="lang-bash">$ <span class="hljs-built_in">cd</span> tty0tty/module
+$ make
+</code></pre>
+<p>Copy the new kernel module into the kernel modules directory</p>
+<pre><code class="lang-bash">$ sudo cp tty0tty.ko /lib/modules/$(uname -r)/kernel/drivers/misc/
+</code></pre>
+<p>Load the module</p>
+<pre><code class="lang-bash">$ sudo depmod
+$ sudo modprobe tty0tty
+</code></pre>
+<p>You should see new serial ports in /dev/ (ls /dev/tnt*) Give appropriate permissions to the new serial ports:</p>
+<pre><code class="lang-bash">$ sudo chmod <span class="hljs-number">666</span> /dev/tnt*
+</code></pre>
+<p>When the module is loaded, it will interconnect the following virtual interfaces:</p>
+<pre><code class="lang-bash">/dev/tnt0 &lt;=&gt; /dev/tnt1
+/dev/tnt2 &lt;=&gt; /dev/tnt3
+/dev/tnt4 &lt;=&gt; /dev/tnt5
+/dev/tnt6 &lt;=&gt; /dev/tnt7
+</code></pre>
+<p>Now you can configure <a href="http://fluentbit.io" target="_blank">Fluent Bit</a> to listen on <em>/dev/tnt0</em> and write messages over <em>/dev/tnt1</em>, e.g:</p>
+<pre><code class="lang-bash">$ sudo bin/fluent-bit -c serial.conf -i serial -o stdout -V
+Fluent-Bit v0.<span class="hljs-number">1.0</span>
+Copyright (C) Treasure Data
+
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">12</span>:<span class="hljs-number">50</span>:<span class="hljs-number">03</span>] [ info] Configuration
+flush time     : <span class="hljs-number">5</span> seconds
+input plugins  : serial
+collectors     :
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">12</span>:<span class="hljs-number">50</span>:<span class="hljs-number">03</span>] [ info] starting engine
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">12</span>:<span class="hljs-number">50</span>:<span class="hljs-number">03</span>] [debug] Serial / file=<span class="hljs-string">&apos;/dev/tnt0&apos;</span> bitrate=<span class="hljs-string">&apos;9600&apos;</span>
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">12</span>:<span class="hljs-number">50</span>:<span class="hljs-number">14</span>] [debug] [<span class="hljs-keyword">in</span>_serial] <span class="hljs-string">&apos;testing&apos;</span>
+[<span class="hljs-number">0</span>] [<span class="hljs-number">1438195814</span>, {<span class="hljs-string">&quot;msg&quot;</span>=&gt;<span class="hljs-string">&quot;testing&quot;</span>}]
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">12</span>:<span class="hljs-number">50</span>:<span class="hljs-number">17</span>] [ info] Flush buf <span class="hljs-number">21</span> bytes
+</code></pre>
+<p>Write some messages</p>
+<pre><code class="lang-bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;testing&quot;</span> &gt; /dev/tnt1
+</code></pre>
 
                     
                     </section>
@@ -496,10 +557,10 @@
         </div>
 
         
-        <a href="../about/index.html" class="navigation navigation-prev " aria-label="Previous page: About"><i class="fa fa-angle-left"></i></a>
+        <a href="../input/mem.html" class="navigation navigation-prev " aria-label="Previous page: Memory Usage"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../about/license.html" class="navigation navigation-next " aria-label="Next page: License"><i class="fa fa-angle-right"></i></a>
+        <a href="../input/stdin.html" class="navigation navigation-next " aria-label="Next page: Standard Input"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

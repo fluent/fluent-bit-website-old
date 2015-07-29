@@ -25,6 +25,8 @@
         
     
     
+    <link rel="next" href="../input/serial.html" />
+    
     
     <link rel="prev" href="../input/kmsg.html" />
     
@@ -34,7 +36,7 @@
     <body>
         
         
-    <div class="book" data-level="3.3" data-basepath=".." data-revision="Fri Jul 17 2015 16:13:06 GMT-0600 (CST)">
+    <div class="book" data-level="3.3" data-basepath=".." data-revision="Wed Jul 29 2015 15:21:15 GMT-0600 (CST)">
     
 
 <div class="book-summary">
@@ -133,14 +135,30 @@
     
         <li class="chapter " data-level="2.1" data-path="getting_started/requirements.html">
             
-            <span><b>2.1.</b> Requirements</span>
+                
+                    <a href="../getting_started/requirements.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.1.</b>
+                        
+                        Requirements
+                    </a>
+                
             
             
         </li>
     
         <li class="chapter " data-level="2.2" data-path="getting_started/installation.html">
             
-            <span><b>2.2.</b> Installation</span>
+                
+                    <a href="../getting_started/installation.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.2.</b>
+                        
+                        Build and Install
+                    </a>
+                
             
             
         </li>
@@ -213,21 +231,45 @@
     
         <li class="chapter " data-level="3.4" data-path="input/serial.html">
             
-            <span><b>3.4.</b> Serial Interface</span>
+                
+                    <a href="../input/serial.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.4.</b>
+                        
+                        Serial Interface
+                    </a>
+                
             
             
         </li>
     
         <li class="chapter " data-level="3.5" data-path="input/stdin.html">
             
-            <span><b>3.5.</b> Standard Input</span>
+                
+                    <a href="../input/stdin.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.5.</b>
+                        
+                        Standard Input
+                    </a>
+                
             
             
         </li>
     
         <li class="chapter " data-level="3.6" data-path="input/xbee.html">
             
-            <span><b>3.6.</b> XBee Radio</span>
+                
+                    <a href="../input/xbee.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.6.</b>
+                        
+                        XBee Radio
+                    </a>
+                
             
             
         </li>
@@ -239,7 +281,15 @@
     
         <li class="chapter " data-level="4" data-path="output/index.html">
             
-            <span><b>4.</b> Output Plugins</span>
+                
+                    <a href="../output/index.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.</b>
+                        
+                        Output Plugins
+                    </a>
+                
             
             
             <ul class="articles">
@@ -247,21 +297,30 @@
     
         <li class="chapter " data-level="4.1" data-path="output/fluentd.html">
             
-            <span><b>4.1.</b> Fluentd</span>
+                
+                    <a href="../output/fluentd.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.1.</b>
+                        
+                        Fluentd
+                    </a>
+                
             
             
         </li>
     
-        <li class="chapter " data-level="4.2" data-path="output/td.html">
+        <li class="chapter " data-level="4.2" data-path="output/stdout.html">
             
-            <span><b>4.2.</b> Treasure Data</span>
-            
-            
-        </li>
-    
-        <li class="chapter " data-level="4.3" data-path="output/stdout.html">
-            
-            <span><b>4.3.</b> Standard Output</span>
+                
+                    <a href="../output/stdout.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.2.</b>
+                        
+                        Standard Output
+                    </a>
+                
             
             
         </li>
@@ -379,27 +438,28 @@
                         <h1 id="memory-usage">Memory Usage</h1>
 <p>The <strong>mem</strong> input plugin, gather the information about the memory usage of the running system every certain interval of time and reports the total amount of memory and the amount of free available.</p>
 <p>In order to measure read the Kernel log messages with <a href="http://fluentbit.io" target="_blank">Fluent Bit</a>, specify the following command line arguments:</p>
-<pre><code>$ bin/fluent-bit -i mem -o stdout -V
-Fluent-Bit v0.1.0
+<pre><code class="lang-bash">$ bin/fluent-bit -i mem -o stdout -V
+Fluent-Bit v0.<span class="hljs-number">1.0</span>
 Copyright (C) Treasure Data
 
-[2015/07/17 15:48:28] [ info] Configuration
-flush time     : 5 seconds
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">17</span> <span class="hljs-number">15</span>:<span class="hljs-number">48</span>:<span class="hljs-number">28</span>] [ info] Configuration
+flush time     : <span class="hljs-number">5</span> seconds
 input plugins  : mem
 collectors     :
-[2015/07/17 15:48:28] [ info] starting engine
-[2015/07/17 15:48:28] [debug] [in_mem] memory total -314380288 kb, free 659427328 kb (buffer=0)
-[2015/07/17 15:48:29] [debug] [in_mem] memory total -314380288 kb, free 659394560 kb (buffer=1)
-[2015/07/17 15:48:30] [debug] [in_mem] memory total -314380288 kb, free 659046400 kb (buffer=2)
-[2015/07/17 15:48:31] [debug] [in_mem] memory total -314380288 kb, free 658538496 kb (buffer=3)
-[2015/07/17 15:48:32] [debug] [in_mem] memory total -314380288 kb, free 658190336 kb (buffer=4)
-[0] [1437169708, {&quot;total&quot;=&gt;8081596, &quot;free&quot;=&gt;643972}]
-[1] [1437169709, {&quot;total&quot;=&gt;8081596, &quot;free&quot;=&gt;643940}]
-[2] [1437169710, {&quot;total&quot;=&gt;8081596, &quot;free&quot;=&gt;643600}]
-[3] [1437169711, {&quot;total&quot;=&gt;8081596, &quot;free&quot;=&gt;643104}]
-[4] [1437169712, {&quot;total&quot;=&gt;8081596, &quot;free&quot;=&gt;642764}]
-[2015/07/17 15:48:32] [ info] Flush buf 150 bytes
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">17</span> <span class="hljs-number">15</span>:<span class="hljs-number">48</span>:<span class="hljs-number">28</span>] [ info] starting engine
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">17</span> <span class="hljs-number">15</span>:<span class="hljs-number">48</span>:<span class="hljs-number">28</span>] [debug] [<span class="hljs-keyword">in</span>_mem] memory total -<span class="hljs-number">314380288</span> kb, free <span class="hljs-number">659427328</span> kb (buffer=<span class="hljs-number">0</span>)
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">17</span> <span class="hljs-number">15</span>:<span class="hljs-number">48</span>:<span class="hljs-number">29</span>] [debug] [<span class="hljs-keyword">in</span>_mem] memory total -<span class="hljs-number">314380288</span> kb, free <span class="hljs-number">659394560</span> kb (buffer=<span class="hljs-number">1</span>)
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">17</span> <span class="hljs-number">15</span>:<span class="hljs-number">48</span>:<span class="hljs-number">30</span>] [debug] [<span class="hljs-keyword">in</span>_mem] memory total -<span class="hljs-number">314380288</span> kb, free <span class="hljs-number">659046400</span> kb (buffer=<span class="hljs-number">2</span>)
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">17</span> <span class="hljs-number">15</span>:<span class="hljs-number">48</span>:<span class="hljs-number">31</span>] [debug] [<span class="hljs-keyword">in</span>_mem] memory total -<span class="hljs-number">314380288</span> kb, free <span class="hljs-number">658538496</span> kb (buffer=<span class="hljs-number">3</span>)
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">17</span> <span class="hljs-number">15</span>:<span class="hljs-number">48</span>:<span class="hljs-number">32</span>] [debug] [<span class="hljs-keyword">in</span>_mem] memory total -<span class="hljs-number">314380288</span> kb, free <span class="hljs-number">658190336</span> kb (buffer=<span class="hljs-number">4</span>)
+[<span class="hljs-number">0</span>] [<span class="hljs-number">1437169708</span>, {<span class="hljs-string">&quot;total&quot;</span>=&gt;<span class="hljs-number">8081596</span>, <span class="hljs-string">&quot;free&quot;</span>=&gt;<span class="hljs-number">643972</span>}]
+[<span class="hljs-number">1</span>] [<span class="hljs-number">1437169709</span>, {<span class="hljs-string">&quot;total&quot;</span>=&gt;<span class="hljs-number">8081596</span>, <span class="hljs-string">&quot;free&quot;</span>=&gt;<span class="hljs-number">643940</span>}]
+[<span class="hljs-number">2</span>] [<span class="hljs-number">1437169710</span>, {<span class="hljs-string">&quot;total&quot;</span>=&gt;<span class="hljs-number">8081596</span>, <span class="hljs-string">&quot;free&quot;</span>=&gt;<span class="hljs-number">643600</span>}]
+[<span class="hljs-number">3</span>] [<span class="hljs-number">1437169711</span>, {<span class="hljs-string">&quot;total&quot;</span>=&gt;<span class="hljs-number">8081596</span>, <span class="hljs-string">&quot;free&quot;</span>=&gt;<span class="hljs-number">643104</span>}]
+[<span class="hljs-number">4</span>] [<span class="hljs-number">1437169712</span>, {<span class="hljs-string">&quot;total&quot;</span>=&gt;<span class="hljs-number">8081596</span>, <span class="hljs-string">&quot;free&quot;</span>=&gt;<span class="hljs-number">642764</span>}]
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">17</span> <span class="hljs-number">15</span>:<span class="hljs-number">48</span>:<span class="hljs-number">32</span>] [ info] Flush buf <span class="hljs-number">150</span> bytes
 </code></pre>
+
                     
                     </section>
                 
@@ -409,8 +469,10 @@ collectors     :
         </div>
 
         
-        <a href="../input/kmsg.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Kernel Log Buffer"><i class="fa fa-angle-left"></i></a>
+        <a href="../input/kmsg.html" class="navigation navigation-prev " aria-label="Previous page: Kernel Log Buffer"><i class="fa fa-angle-left"></i></a>
         
+        
+        <a href="../input/serial.html" class="navigation navigation-next " aria-label="Next page: Serial Interface"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

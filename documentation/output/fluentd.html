@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Fluentd &amp; Fluent Bit | Fluent Bit</title>
+        <title>Fluentd | Fluent Bit</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 2.1.0">
@@ -25,10 +25,10 @@
         
     
     
-    <link rel="next" href="../about/license.html" />
+    <link rel="next" href="../output/stdout.html" />
     
     
-    <link rel="prev" href="../about/index.html" />
+    <link rel="prev" href="../output/index.html" />
     
 
         
@@ -36,7 +36,7 @@
     <body>
         
         
-    <div class="book" data-level="1.1" data-basepath=".." data-revision="Wed Jul 29 2015 15:21:15 GMT-0600 (CST)">
+    <div class="book" data-level="4.1" data-basepath=".." data-revision="Wed Jul 29 2015 15:21:15 GMT-0600 (CST)">
     
 
 <div class="book-summary">
@@ -82,7 +82,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.1" data-path="about/fluentd_and_fluentbit.html">
+        <li class="chapter " data-level="1.1" data-path="about/fluentd_and_fluentbit.html">
             
                 
                     <a href="../about/fluentd_and_fluentbit.html">
@@ -295,7 +295,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="4.1" data-path="output/fluentd.html">
+        <li class="chapter active" data-level="4.1" data-path="output/fluentd.html">
             
                 
                     <a href="../output/fluentd.html">
@@ -435,57 +435,73 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="fluentd-and-fluent-bit">Fluentd and Fluent Bit</h1>
-<p>Data collection matters and nowadays the scenarios from where the information can <em>come from</em> are very variable. For hence to be more flexible on certain markets needs, we may need different options. On this page we will describe the relationship between the <a href="http://fluentd.org" target="_blank">Fluentd</a> and <a href="http://fluentbit.io" target="_blank">Fluent Bit</a> open source projects.</p>
-<p><a href="http://fluentd.org" target="_blank">Fluentd</a> and <a href="http://fluentbit.io" target="_blank">Fluent Bit</a> projects are both created and sponsored by <a href="http://treasuredata.com" target="_blank">Treasure Data</a> and they aim to solve the data collection needs but on different scenarios and environments, the following table describe a comparisson on different areas of the projects:</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Fluentd</th>
-<th>Fluent Bit</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Scope</td>
-<td>Servers</td>
-<td>Embedded &amp; IoT devices</td>
-</tr>
-<tr>
-<td>Language</td>
-<td>C &amp; Ruby</td>
-<td>C</td>
-</tr>
-<tr>
-<td>Memory</td>
-<td>~20MB</td>
-<td>~150KB</td>
-</tr>
-<tr>
-<td>Performance</td>
-<td>High Performance</td>
-<td>High Performance</td>
-</tr>
-<tr>
-<td>Dependencies</td>
-<td>Built as a Ruby Gem, it requires a certain number of gems.</td>
-<td>Zero dependencies, unless some special plugin requires them.</td>
-</tr>
-<tr>
-<td>Plugins</td>
-<td>More than 300 plugins available</td>
-<td>Less than 10 plugins available</td>
-</tr>
-<tr>
-<td>License</td>
-<td><a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a></td>
-<td><a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a></td>
-</tr>
-</tbody>
-</table>
-<p>As described in the table, if the target environment is a server with common capacity, <a href="http://fluentd.org" target="_blank">Fluentd</a> is a great option due to it flexibility and availability of plugins (more than 300 extensions!) but if the <em>data collection</em> will happen in an Embedded environment or an IoT device where the system capacity is restricted, <a href="http://fluentbit.io" target="_blank">Fluent Bit</a> is the solution to use.</p>
-<p>Both tools are not mutual exclusive, <a href="http://fluentbit.io" target="_blank">Fluent Bit</a> provides and <em>output</em> plugin to flush the information to a <a href="http://fluentd.org" target="_blank">Fluentd</a> instance, so they can work together in your architecture or as independent services.</p>
+                        <h1 id="fluentd">Fluentd</h1>
+<p>The <strong>fluentd</strong> output plugin allows to integrate <a href="http://fluentbit.io" target="_blank">Fluent Bit</a> with <a href="http://fluentd.org" target="_blank">Fluentd</a> easily. There are not configuration steps required besides to specify where <a href="http://fluentd.org" target="_blank">Fluentd</a> is located, it can be on the local host or a in a remote machine.</p>
+<h2 id="fluentd-setup">Fluentd Setup</h2>
+<p>Before to proceed, make sure that <a href="http://fluentd.org" target="_blank">Fluentd</a> is installed in your system, if it&apos;s not the case please refer to the following <a href="http://docs.fluentd.org/v0.12/categories/installation" target="_blank">Fluentd Installation</a> document and go ahead with that.</p>
+<p>Once <a href="http://fluentd.org" target="_blank">Fluentd</a> is installed, create the following configuration file example that will allow us to stream data into it:</p>
+<pre><code>&lt;source&gt;
+  type forward
+  bind 0.0.0.0
+  port 12225
+&lt;/source&gt;
+
+&lt;match fluent_bit&gt;
+  type stdout
+&lt;/match&gt;
+</code></pre><p>That configuration file specify that will listen for <em>TCP</em> connections on the port <em>12225</em> through the <strong>forward</strong> input type. Then for every message with a <em>fluent_bit</em> __TAG, will print it out to the standard output.</p>
+<p>In one terminal launch <a href="http://fluentd.org" target="_blank">Fluentd</a> specifying the new configuration file created (in_fluent-bit.conf):</p>
+<pre><code class="lang-bash">$ fluentd -c <span class="hljs-keyword">in</span>_fluent-bit.conf
+<span class="hljs-number">2015</span>-<span class="hljs-number">07</span>-<span class="hljs-number">29</span> <span class="hljs-number">14</span>:<span class="hljs-number">50</span>:<span class="hljs-number">47</span> -<span class="hljs-number">0600</span> [info]: reading config file path=<span class="hljs-string">&quot;in_fluent-bit.conf&quot;</span>
+<span class="hljs-number">2015</span>-<span class="hljs-number">07</span>-<span class="hljs-number">29</span> <span class="hljs-number">14</span>:<span class="hljs-number">50</span>:<span class="hljs-number">47</span> -<span class="hljs-number">0600</span> [info]: starting fluentd-<span class="hljs-number">0.12</span>.<span class="hljs-number">14</span>
+<span class="hljs-number">2015</span>-<span class="hljs-number">07</span>-<span class="hljs-number">29</span> <span class="hljs-number">14</span>:<span class="hljs-number">50</span>:<span class="hljs-number">47</span> -<span class="hljs-number">0600</span> [info]: gem <span class="hljs-string">&apos;fluent-plugin-mongo&apos;</span> version <span class="hljs-string">&apos;0.7.9&apos;</span>
+<span class="hljs-number">2015</span>-<span class="hljs-number">07</span>-<span class="hljs-number">29</span> <span class="hljs-number">14</span>:<span class="hljs-number">50</span>:<span class="hljs-number">47</span> -<span class="hljs-number">0600</span> [info]: gem <span class="hljs-string">&apos;fluent-plugin-multi-format-parser&apos;</span> version <span class="hljs-string">&apos;0.0.2&apos;</span>
+<span class="hljs-number">2015</span>-<span class="hljs-number">07</span>-<span class="hljs-number">29</span> <span class="hljs-number">14</span>:<span class="hljs-number">50</span>:<span class="hljs-number">47</span> -<span class="hljs-number">0600</span> [info]: gem <span class="hljs-string">&apos;fluent-plugin-rewrite-tag-filter&apos;</span> version <span class="hljs-string">&apos;1.5.1&apos;</span>
+<span class="hljs-number">2015</span>-<span class="hljs-number">07</span>-<span class="hljs-number">29</span> <span class="hljs-number">14</span>:<span class="hljs-number">50</span>:<span class="hljs-number">47</span> -<span class="hljs-number">0600</span> [info]: gem <span class="hljs-string">&apos;fluentd&apos;</span> version <span class="hljs-string">&apos;0.12.8&apos;</span>
+<span class="hljs-number">2015</span>-<span class="hljs-number">07</span>-<span class="hljs-number">29</span> <span class="hljs-number">14</span>:<span class="hljs-number">50</span>:<span class="hljs-number">47</span> -<span class="hljs-number">0600</span> [info]: gem <span class="hljs-string">&apos;fluentd&apos;</span> version <span class="hljs-string">&apos;0.12.5&apos;</span>
+<span class="hljs-number">2015</span>-<span class="hljs-number">07</span>-<span class="hljs-number">29</span> <span class="hljs-number">14</span>:<span class="hljs-number">50</span>:<span class="hljs-number">47</span> -<span class="hljs-number">0600</span> [info]: gem <span class="hljs-string">&apos;fluentd&apos;</span> version <span class="hljs-string">&apos;0.10.61&apos;</span>
+<span class="hljs-number">2015</span>-<span class="hljs-number">07</span>-<span class="hljs-number">29</span> <span class="hljs-number">14</span>:<span class="hljs-number">50</span>:<span class="hljs-number">47</span> -<span class="hljs-number">0600</span> [info]: adding match pattern=<span class="hljs-string">&quot;fluent_bit&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;stdout&quot;</span>
+<span class="hljs-number">2015</span>-<span class="hljs-number">07</span>-<span class="hljs-number">29</span> <span class="hljs-number">14</span>:<span class="hljs-number">50</span>:<span class="hljs-number">47</span> -<span class="hljs-number">0600</span> [info]: adding <span class="hljs-built_in">source</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;forward&quot;</span>
+<span class="hljs-number">2015</span>-<span class="hljs-number">07</span>-<span class="hljs-number">29</span> <span class="hljs-number">14</span>:<span class="hljs-number">50</span>:<span class="hljs-number">47</span> -<span class="hljs-number">0600</span> [info]: using configuration file: &lt;ROOT&gt;
+&lt;<span class="hljs-built_in">source</span>&gt;
+  <span class="hljs-built_in">type</span> forward
+  <span class="hljs-built_in">bind</span> <span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span>
+  port <span class="hljs-number">12225</span>
+&lt;/<span class="hljs-built_in">source</span>&gt;
+&lt;match fluent_bit&gt;
+  <span class="hljs-built_in">type</span> stdout
+  &lt;/match&gt;
+&lt;/ROOT&gt;
+<span class="hljs-number">2015</span>-<span class="hljs-number">07</span>-<span class="hljs-number">29</span> <span class="hljs-number">14</span>:<span class="hljs-number">50</span>:<span class="hljs-number">47</span> -<span class="hljs-number">0600</span> [info]: listening fluent socket on <span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span>:<span class="hljs-number">12225</span>
+</code></pre>
+<h2 id="fluent-bit-setup">Fluent Bit Setup</h2>
+<p>Now that <a href="http://fluentd.org" target="_blank">Fluentd</a> is ready to receive messages, we need to specify where the <strong>fluentd</strong> output plugin will flush the information using the following format:</p>
+<pre><code>bin/fluent-bit -i INPUT -o fluentd://HOST:PORT
+</code></pre><p>Using the <a href="../input/cpu.html">CPU</a> input plugin as an example we will flush CPU metrics to <a href="http://fluentd.org" target="_blank">Fluentd</a>:</p>
+<pre><code class="lang-bash">$ bin/fluent-bit -i cpu -o fluentd://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">12225</span>
+</code></pre>
+<p>In <a href="http://fluentbit.io" target="_blank">Fluent Bit</a> we should see the following output:</p>
+<pre><code>Fluent-Bit v0.1.0
+Copyright (C) Treasure Data
+
+[2015/07/29 14:58:02] [ info] Configuration
+ flush time     : 5 seconds
+ input plugins  : cpu
+ collectors     :
+[2015/07/29 14:58:02] [ info] starting engine
+[2015/07/29 14:58:02] [debug] [in_cpu] CPU 4.25% (buffer=0)
+[2015/07/29 14:58:03] [debug] [in_cpu] CPU 13.00% (buffer=1)
+[2015/07/29 14:58:04] [debug] [in_cpu] CPU 8.50% (buffer=2)
+[2015/07/29 14:58:05] [debug] [in_cpu] CPU 2.50% (buffer=3)
+[2015/07/29 14:58:06] [ info] Flush buf 98 bytes
+</code></pre><p>Now on the <a href="http://fluentd.org" target="_blank">Fluentd</a> side the following:</p>
+<pre><code class="lang-bash"><span class="hljs-number">2015</span>-<span class="hljs-number">07</span>-<span class="hljs-number">29</span> <span class="hljs-number">14</span>:<span class="hljs-number">50</span>:<span class="hljs-number">47</span> -<span class="hljs-number">0600</span> [info]: listening fluent socket on <span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span>:<span class="hljs-number">12225</span>
+<span class="hljs-number">2015</span>-<span class="hljs-number">07</span>-<span class="hljs-number">29</span> <span class="hljs-number">14</span>:<span class="hljs-number">58</span>:<span class="hljs-number">02</span> -<span class="hljs-number">0600</span> fluent_bit: {<span class="hljs-string">&quot;cpu&quot;</span>:<span class="hljs-number">4.25</span>}
+<span class="hljs-number">2015</span>-<span class="hljs-number">07</span>-<span class="hljs-number">29</span> <span class="hljs-number">14</span>:<span class="hljs-number">58</span>:<span class="hljs-number">03</span> -<span class="hljs-number">0600</span> fluent_bit: {<span class="hljs-string">&quot;cpu&quot;</span>:<span class="hljs-number">13.0</span>}
+<span class="hljs-number">2015</span>-<span class="hljs-number">07</span>-<span class="hljs-number">29</span> <span class="hljs-number">14</span>:<span class="hljs-number">58</span>:<span class="hljs-number">04</span> -<span class="hljs-number">0600</span> fluent_bit: {<span class="hljs-string">&quot;cpu&quot;</span>:<span class="hljs-number">8.5</span>}
+<span class="hljs-number">2015</span>-<span class="hljs-number">07</span>-<span class="hljs-number">29</span> <span class="hljs-number">14</span>:<span class="hljs-number">58</span>:<span class="hljs-number">05</span> -<span class="hljs-number">0600</span> fluent_bit: {<span class="hljs-string">&quot;cpu&quot;</span>:<span class="hljs-number">2.5</span>}
+</code></pre>
+<p>So we gathered <a href="../input/cpu.html">CPU</a> metrics and flush them out to <a href="http://fluentd.org" target="_blank">Fluentd</a> properly.</p>
 
                     
                     </section>
@@ -496,10 +512,10 @@
         </div>
 
         
-        <a href="../about/index.html" class="navigation navigation-prev " aria-label="Previous page: About"><i class="fa fa-angle-left"></i></a>
+        <a href="../output/index.html" class="navigation navigation-prev " aria-label="Previous page: Output Plugins"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../about/license.html" class="navigation navigation-next " aria-label="Next page: License"><i class="fa fa-angle-right"></i></a>
+        <a href="../output/stdout.html" class="navigation navigation-next " aria-label="Next page: Standard Output"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

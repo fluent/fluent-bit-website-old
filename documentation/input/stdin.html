@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Fluentd &amp; Fluent Bit | Fluent Bit</title>
+        <title>Standard Input | Fluent Bit</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 2.1.0">
@@ -25,10 +25,10 @@
         
     
     
-    <link rel="next" href="../about/license.html" />
+    <link rel="next" href="../input/xbee.html" />
     
     
-    <link rel="prev" href="../about/index.html" />
+    <link rel="prev" href="../input/serial.html" />
     
 
         
@@ -36,7 +36,7 @@
     <body>
         
         
-    <div class="book" data-level="1.1" data-basepath=".." data-revision="Wed Jul 29 2015 15:21:15 GMT-0600 (CST)">
+    <div class="book" data-level="3.5" data-basepath=".." data-revision="Wed Jul 29 2015 15:21:15 GMT-0600 (CST)">
     
 
 <div class="book-summary">
@@ -82,7 +82,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.1" data-path="about/fluentd_and_fluentbit.html">
+        <li class="chapter " data-level="1.1" data-path="about/fluentd_and_fluentbit.html">
             
                 
                     <a href="../about/fluentd_and_fluentbit.html">
@@ -244,7 +244,7 @@
             
         </li>
     
-        <li class="chapter " data-level="3.5" data-path="input/stdin.html">
+        <li class="chapter active" data-level="3.5" data-path="input/stdin.html">
             
                 
                     <a href="../input/stdin.html">
@@ -435,57 +435,42 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="fluentd-and-fluent-bit">Fluentd and Fluent Bit</h1>
-<p>Data collection matters and nowadays the scenarios from where the information can <em>come from</em> are very variable. For hence to be more flexible on certain markets needs, we may need different options. On this page we will describe the relationship between the <a href="http://fluentd.org" target="_blank">Fluentd</a> and <a href="http://fluentbit.io" target="_blank">Fluent Bit</a> open source projects.</p>
-<p><a href="http://fluentd.org" target="_blank">Fluentd</a> and <a href="http://fluentbit.io" target="_blank">Fluent Bit</a> projects are both created and sponsored by <a href="http://treasuredata.com" target="_blank">Treasure Data</a> and they aim to solve the data collection needs but on different scenarios and environments, the following table describe a comparisson on different areas of the projects:</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Fluentd</th>
-<th>Fluent Bit</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Scope</td>
-<td>Servers</td>
-<td>Embedded &amp; IoT devices</td>
-</tr>
-<tr>
-<td>Language</td>
-<td>C &amp; Ruby</td>
-<td>C</td>
-</tr>
-<tr>
-<td>Memory</td>
-<td>~20MB</td>
-<td>~150KB</td>
-</tr>
-<tr>
-<td>Performance</td>
-<td>High Performance</td>
-<td>High Performance</td>
-</tr>
-<tr>
-<td>Dependencies</td>
-<td>Built as a Ruby Gem, it requires a certain number of gems.</td>
-<td>Zero dependencies, unless some special plugin requires them.</td>
-</tr>
-<tr>
-<td>Plugins</td>
-<td>More than 300 plugins available</td>
-<td>Less than 10 plugins available</td>
-</tr>
-<tr>
-<td>License</td>
-<td><a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a></td>
-<td><a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a></td>
-</tr>
-</tbody>
-</table>
-<p>As described in the table, if the target environment is a server with common capacity, <a href="http://fluentd.org" target="_blank">Fluentd</a> is a great option due to it flexibility and availability of plugins (more than 300 extensions!) but if the <em>data collection</em> will happen in an Embedded environment or an IoT device where the system capacity is restricted, <a href="http://fluentbit.io" target="_blank">Fluent Bit</a> is the solution to use.</p>
-<p>Both tools are not mutual exclusive, <a href="http://fluentbit.io" target="_blank">Fluent Bit</a> provides and <em>output</em> plugin to flush the information to a <a href="http://fluentd.org" target="_blank">Fluentd</a> instance, so they can work together in your architecture or as independent services.</p>
+                        <h1 id="standard-input">Standard Input</h1>
+<p>The <strong>stdin</strong> plugin allows to retrieve valid JSON text messages over the standard input interface (stdin). In order to use it, specify the plugin name as the input, e.g:</p>
+<pre><code class="lang-bash">$ ./bin/fluent-bit -i stdin -o stdout
+</code></pre>
+<p>A better example to demonstrate how it works will be through a <em>Bash</em> script that generate messages and write them to <a href="http://fluentbit.io" target="_blank">Fluent Bit</a>. Write the following content in a file named <em>test.sh</em>:</p>
+<pre><code class="lang-bash"><span class="hljs-shebang">#!/bin/sh
+</span>
+<span class="hljs-keyword">while</span> :; <span class="hljs-keyword">do</span>
+  <span class="hljs-built_in">echo</span> -n <span class="hljs-string">&quot;{\&quot;key\&quot;: \&quot;some value\&quot;}&quot;</span>
+  sleep <span class="hljs-number">1</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<p>Give the script execution permission:</p>
+<pre><code class="lang-bash">$ chmod <span class="hljs-number">755</span> test.sh
+</code></pre>
+<p>Now lets start the script and <a href="http://fluentbit.io" target="_blank">Fluent Bit</a> in the following way:</p>
+<pre><code class="lang-bash">$ ./test.sh | bin/fluent-bit -i stdin -o stdout -V
+Fluent-Bit v0.<span class="hljs-number">2.0</span>
+Copyright (C) Treasure Data
+
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">13</span>:<span class="hljs-number">51</span>:<span class="hljs-number">02</span>] [ info] Configuration
+flush time     : <span class="hljs-number">5</span> seconds
+input plugins  : stdin
+collectors     :
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">13</span>:<span class="hljs-number">51</span>:<span class="hljs-number">02</span>] [ info] starting engine
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">13</span>:<span class="hljs-number">51</span>:<span class="hljs-number">02</span>] [debug] <span class="hljs-keyword">in</span>_stdin <span class="hljs-built_in">read</span>() = <span class="hljs-number">21</span>
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">13</span>:<span class="hljs-number">51</span>:<span class="hljs-number">03</span>] [debug] <span class="hljs-keyword">in</span>_stdin <span class="hljs-built_in">read</span>() = <span class="hljs-number">21</span>
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">13</span>:<span class="hljs-number">51</span>:<span class="hljs-number">04</span>] [debug] <span class="hljs-keyword">in</span>_stdin <span class="hljs-built_in">read</span>() = <span class="hljs-number">21</span>
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">13</span>:<span class="hljs-number">51</span>:<span class="hljs-number">05</span>] [debug] <span class="hljs-keyword">in</span>_stdin <span class="hljs-built_in">read</span>() = <span class="hljs-number">21</span>
+[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">13</span>:<span class="hljs-number">51</span>:<span class="hljs-number">06</span>] [debug] <span class="hljs-keyword">in</span>_stdin <span class="hljs-built_in">read</span>() = <span class="hljs-number">21</span>
+[<span class="hljs-number">0</span>] {<span class="hljs-string">&quot;key&quot;</span>=&gt;<span class="hljs-string">&quot;some value&quot;</span>}
+[<span class="hljs-number">1</span>] {<span class="hljs-string">&quot;key&quot;</span>=&gt;<span class="hljs-string">&quot;some value&quot;</span>}
+[<span class="hljs-number">2</span>] {<span class="hljs-string">&quot;key&quot;</span>=&gt;<span class="hljs-string">&quot;some value&quot;</span>}
+[<span class="hljs-number">3</span>] {<span class="hljs-string">&quot;key&quot;</span>=&gt;<span class="hljs-string">&quot;some value&quot;</span>}
+[<span class="hljs-number">4</span>] {<span class="hljs-string">&quot;key&quot;</span>=&gt;<span class="hljs-string">&quot;some value&quot;</span>}
+</code></pre>
 
                     
                     </section>
@@ -496,10 +481,10 @@
         </div>
 
         
-        <a href="../about/index.html" class="navigation navigation-prev " aria-label="Previous page: About"><i class="fa fa-angle-left"></i></a>
+        <a href="../input/serial.html" class="navigation navigation-prev " aria-label="Previous page: Serial Interface"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../about/license.html" class="navigation navigation-next " aria-label="Next page: License"><i class="fa fa-angle-right"></i></a>
+        <a href="../input/xbee.html" class="navigation navigation-next " aria-label="Next page: XBee Radio"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
