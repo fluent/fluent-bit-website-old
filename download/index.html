@@ -18,28 +18,28 @@
     <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 
     <!-- CSS Global Compulsory -->
-    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 
     <!-- CSS Header and Footer -->
-    <link rel="stylesheet" href="assets/css/headers/header-default.css">
-    <link rel="stylesheet" href="assets/css/footers/footer-v1.css">
+    <link rel="stylesheet" href="../assets/css/headers/header-default.css">
+    <link rel="stylesheet" href="../assets/css/footers/footer-v1.css">
 
     <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="assets/plugins/animate.css">
-    <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css">
-    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
-    <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
-    <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+    <link rel="stylesheet" href="../assets/plugins/animate.css">
+    <link rel="stylesheet" href="../assets/plugins/line-icons/line-icons.css">
+    <link rel="stylesheet" href="../assets/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="../assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+    <link rel="stylesheet" href="../assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
     <!--[if lt IE 9]><link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms-ie8.css"><![endif]-->
 
     <!-- CSS Page Style -->
-    <link rel="stylesheet" href="assets/css/pages/page_search.css">
+    <link rel="stylesheet" href="../assets/css/pages/page_search.css">
 
     <!-- CSS Customization -->
-    <link rel="stylesheet" href="assets/css/custom.css">
-    <link rel="stylesheet" href="assets/css/theme-colors/dark-blue.css">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/css/theme-colors/dark-blue.css">
 
 </head>
 
@@ -51,7 +51,7 @@
         <div class="container">
             <!-- Logo -->
             <a class="logo" href="index.html">
-                <img src="assets/img/fluentbit_logo.png" alt="Logo">
+                <img src="../assets/img/fluentbit_logo.png" alt="Logo">
             </a>
             <!-- End Logo -->
 
@@ -60,7 +60,7 @@
                   <li class="topbar-devider"></li>
                   <li>
                     <a href="http://treasuredata.com">Sponsored by
-                      <img src="assets/img/td_header.png" />
+                      <img src="../assets/img/td_header.png" />
                     </a>
                   </li>
 
@@ -95,7 +95,7 @@
                       </a>
                     </li>
                     <li>
-                      <a href="download/" style="background-color:#4765A0; color:#FFF">
+                      <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" style="background-color:#4765A0; color:#FFF">
                         Download
                       </a>
                     </li>
@@ -119,87 +119,41 @@
     <!--=== Content ===-->
     <div class="container content">
         <!-- Top Categories -->
-        <div class="headline"><h2>Features</h2></div>
+        <div class="headline"><h2>Download</h2></div>
         <div class="row category margin-bottom-20">
             <!-- Info Blocks -->
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-6 col-sm-6">
                 <div class="content-boxes-v3 margin-bottom-10 md-margin-bottom-20">
-                    <i class="icon-custom icon-sm rounded-x icon-bg-sea icon-line icon-badge"></i>
+                    <i class="icon-custom icon-sm rounded-x icon-bg-blue fa fa-cloud-download"></i>
                     <div class="content-boxes-in-v3">
-                        <h3>Open Source</h3>
+                        <h3>Download Stable Releases</h3>
                         <p>
-                          <a href="http://fluentbit.io">Fluent Bit</a> core and plug-ins are licensed under the terms of the
-                          <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License v2</a>.
-                          It's open and business friendly.
+                          The initial version of <a href="http://fluentbit.io">Fluent Bit</a> is already available!:
+                          <ul>
+                            <li>
+                              <a href="http://fluentbit.io/releases/0.1/fluent-bit-0.1.tar.gz">
+                                Fluent Bit v0.1
+                              </a>, released on 2015-07-29</li>
+                          </ul>
                         </p>
-                    </div>
-                </div>
-                <div class="content-boxes-v3 margin-bottom-10 md-margin-bottom-20">
-                    <i class="icon-custom icon-sm rounded-x icon-bg-red fa fa-hdd-o"></i>
-                    <div class="content-boxes-in-v3">
-                        <h3>Lightweight</h3>
-                        <p>Originally made for Embedded Linux systems, it aims to keep a small footprint. Optimized
-                          for low memory and CPU usage.
-                        </p>
-
-                    </div>
-                </div>
-                <div class="content-boxes-v3 margin-bottom-10 md-margin-bottom-20">
-                    <i class="icon-custom icon-sm rounded-x icon-bg-brown fa fa-desktop"></i>
-                    <div class="content-boxes-in-v3">
-                      <h3>Built-in Metrics</h3>
-                      <p>By default it provides built-in metrics interface to measure CPU usage
-                      and trace the Linux Kernel log buffer.</p>
                     </div>
                 </div>
             </div>
-            <!-- End Info Blocks -->
-
-            <!-- Info Blocks -->
-            <div class="col-md-4 col-sm-6 md-margin-bottom-40">
+            <div class="col-md-6 col-sm-6">
                 <div class="content-boxes-v3 margin-bottom-10 md-margin-bottom-20">
-                    <i class="icon-custom icon-sm rounded-x icon-bg-purple fa fa-lightbulb-o"></i>
+                    <i class="icon-custom icon-sm rounded-x icon-bg-sea fa fa-github"></i>
                     <div class="content-boxes-in-v3">
-                        <h3>Embedded Linux</h3>
-                        <p>Engineered for Embedded Linux with a strong focus on <a href="http://openembedded.org">OpenEmbedded</a>
-                          and <a href="http://yoctoproject.org">Yocto Project</a>.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="content-boxes-v3 margin-bottom-10 md-margin-bottom-20">
-                    <i class="icon-custom icon-sm rounded-x icon-bg-yellow fa fa-thumbs-o-up"></i>
-                    <div class="content-boxes-in-v3">
-                        <h3>Extensible</h3>
+                        <h3>Development Version</h3>
                         <p>
-                          All features such as built-in metrics and I/O plugins, are optional at build time. The
-                          core can be extended through a simple registration API</p>.
-                    </div>
-                </div>
-                <div class="content-boxes-v3 margin-bottom-10 md-margin-bottom-20">
-                    <i class="icon-custom icon-sm rounded-x icon-bg-orange fa fa-area-chart"></i>
-                    <div class="content-boxes-in-v3">
-                        <h3>Binary Serialization & Performance</h3>
-                        <p>Despite being lightweight, <a href="http://fluentbit.io">FluentBit</a>
-                          design consider high performance a critical piece in data collection, for hence
-                          the serialization of data is performed using <a href="http://msgpack.org">MessagePack</a>,
-                          a binary representation of JSON.
+                          <a href="http://fluentbit.io">Fluent Bit</a> is an Open Source project where <a href="http://treasuredata.com">we</a> encourage
+                          people to contribute to. If you are interested into follow and track the progress of the project please refer to our official
+                          Github repository at <a href="http://github.com/fluent/fluent-bit">github.com/fluent/fluent-bit</a>.
                         </p>
                     </div>
                 </div>
             </div>
-            <!-- End Info Blocks -->
 
-            <!-- Begin Section-Block -->
-            <div class="col-md-4 col-sm-12">
-                <div class="section-block">
-                    <div class="text-center">
-                        <h2>Data Flow</h2>
-                        <img src="assets/img/fluentbit_flow.png" />
-                    </div>
-                </div>
-            </div>
-            <!-- End Section-Block -->
+            <!-- End Info Blocks -->
         </div>
         <!-- End Top Categories -->
     </div><!--/container-->
@@ -212,7 +166,7 @@
                 <div class="row">
                     <!-- About -->
                     <div class="col-md-6 md-margin-bottom-40">
-                        <a href="index.html"><img id="logo-footer" class="footer-logo" src="assets/img/fluentbit_logo_white.png" alt=""></a>
+                        <a href="index.html"><img id="logo-footer" class="footer-logo" src="../assets/img/fluentbit_logo_white.png" alt=""></a>
                         <p><a href="http://fluentbit.io">FluentBit</a> is an open source specialized data collector tool for Embedded Linux. It provide built-in metrics and
                           general purpose output interfaces for centralized collectors such as <a href="http://fluentd.org">Fluentd</a>.
                           </p>
@@ -279,21 +233,21 @@
 </div><!--/End Wrapepr-->
 
 <!-- JS Global Compulsory -->
-<script type="text/javascript" src="assets/plugins/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="assets/plugins/jquery/jquery-migrate.min.js"></script>
-<script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../assets/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../assets/plugins/jquery/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 <!-- JS Implementing Plugins -->
-<script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
-<script type="text/javascript" src="assets/plugins/smoothScroll.js"></script>
-<script type="text/javascript" src="assets/plugins/jquery.parallax.js"></script>
-<script type="text/javascript" src="assets/plugins/counter/waypoints.min.js"></script>
-<script type="text/javascript" src="assets/plugins/counter/jquery.counterup.min.js"></script>
-<script type="text/javascript" src="assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+<script type="text/javascript" src="../assets/plugins/back-to-top.js"></script>
+<script type="text/javascript" src="../assets/plugins/smoothScroll.js"></script>
+<script type="text/javascript" src="../assets/plugins/jquery.parallax.js"></script>
+<script type="text/javascript" src="../assets/plugins/counter/waypoints.min.js"></script>
+<script type="text/javascript" src="../assets/plugins/counter/jquery.counterup.min.js"></script>
+<script type="text/javascript" src="../assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
 <!-- JS Customization -->
-<script type="text/javascript" src="assets/js/custom.js"></script>
+<script type="text/javascript" src="../assets/js/custom.js"></script>
 <!-- JS Page Level -->
-<script type="text/javascript" src="assets/js/app.js"></script>
-<script type="text/javascript" src="assets/js/plugins/owl-carousel.js"></script>
+<script type="text/javascript" src="../assets/js/app.js"></script>
+<script type="text/javascript" src="../assets/js/plugins/owl-carousel.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();
@@ -303,9 +257,9 @@
     });
 </script>
 <!--[if lt IE 9]>
-    <script src="assets/plugins/respond.js"></script>
-    <script src="assets/plugins/html5shiv.js"></script>
-    <script src="assets/plugins/placeholder-IE-fixes.js"></script>
+    <script src="../assets/plugins/respond.js"></script>
+    <script src="../assets/plugins/html5shiv.js"></script>
+    <script src="../assets/plugins/placeholder-IE-fixes.js"></script>
 <![endif]-->
 
 </body>
