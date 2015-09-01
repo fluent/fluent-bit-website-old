@@ -1,5 +1,0 @@
-Monkey uses very low CPU and Memory consumption, it works fine on any x86, x86_64 platform without problems.
-
-Regarding to the software required to run Monkey successfully, you will need a Linux environment with Kernel version 2.6.29 (at least). The server is developed on top of the Kernel features, so use an older version can cause some buggy behaviors.
-
-Besides the kernel version, the core of Monkey just requires two basic libraries: pthreads and libc, if you use Linux, we are 99% sure that you should not care about this requirement.
