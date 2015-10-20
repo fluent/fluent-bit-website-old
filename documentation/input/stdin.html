@@ -36,7 +36,7 @@
     <body>
         
         
-    <div class="book" data-level="3.6" data-basepath=".." data-revision="Mon Aug 31 2015 21:32:52 GMT-0600 (CST)">
+    <div class="book" data-level="3.6" data-basepath=".." data-revision="Tue Oct 20 2015 16:04:41 GMT-0600 (CST)">
     
 
 <div class="book-summary">
@@ -370,6 +370,21 @@
             
         </li>
     
+        <li class="chapter " data-level="4.3" data-path="output/td.html">
+            
+                
+                    <a href="../output/td.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.3.</b>
+                        
+                        Treasure Data
+                    </a>
+                
+            
+            
+        </li>
+    
 
             </ul>
             
@@ -499,6 +514,10 @@
 <p>The <strong>stdin</strong> plugin allows to retrieve valid JSON text messages over the standard input interface (stdin). In order to use it, specify the plugin name as the input, e.g:</p>
 <pre><code class="lang-bash">$ ./bin/fluent-bit -i stdin -o stdout
 </code></pre>
+<p>As input data the <em>stdin</em> plugin recognize the following JSON data formats:</p>
+<pre><code class="lang-bash"><span class="hljs-number">1</span>. { map =&gt; val, map =&gt; val, map =&gt; val }
+<span class="hljs-number">2</span>. [ time, { map =&gt; val, map =&gt; val, map =&gt; val } ]
+</code></pre>
 <p>A better example to demonstrate how it works will be through a <em>Bash</em> script that generate messages and write them to <a href="http://fluentbit.io" target="_blank">Fluent Bit</a>. Write the following content in a file named <em>test.sh</em>:</p>
 <pre><code class="lang-bash"><span class="hljs-shebang">#!/bin/sh
 </span>
@@ -512,24 +531,24 @@
 </code></pre>
 <p>Now lets start the script and <a href="http://fluentbit.io" target="_blank">Fluent Bit</a> in the following way:</p>
 <pre><code class="lang-bash">$ ./test.sh | bin/fluent-bit -i stdin -o stdout -V
-Fluent-Bit v0.<span class="hljs-number">2.0</span>
+Fluent Bit v0.<span class="hljs-number">3.0</span>
 Copyright (C) Treasure Data
 
-[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">13</span>:<span class="hljs-number">51</span>:<span class="hljs-number">02</span>] [ info] Configuration
-flush time     : <span class="hljs-number">5</span> seconds
-input plugins  : stdin
-collectors     :
-[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">13</span>:<span class="hljs-number">51</span>:<span class="hljs-number">02</span>] [ info] starting engine
-[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">13</span>:<span class="hljs-number">51</span>:<span class="hljs-number">02</span>] [debug] <span class="hljs-keyword">in</span>_stdin <span class="hljs-built_in">read</span>() = <span class="hljs-number">21</span>
-[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">13</span>:<span class="hljs-number">51</span>:<span class="hljs-number">03</span>] [debug] <span class="hljs-keyword">in</span>_stdin <span class="hljs-built_in">read</span>() = <span class="hljs-number">21</span>
-[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">13</span>:<span class="hljs-number">51</span>:<span class="hljs-number">04</span>] [debug] <span class="hljs-keyword">in</span>_stdin <span class="hljs-built_in">read</span>() = <span class="hljs-number">21</span>
-[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">13</span>:<span class="hljs-number">51</span>:<span class="hljs-number">05</span>] [debug] <span class="hljs-keyword">in</span>_stdin <span class="hljs-built_in">read</span>() = <span class="hljs-number">21</span>
-[<span class="hljs-number">2015</span>/<span class="hljs-number">07</span>/<span class="hljs-number">29</span> <span class="hljs-number">13</span>:<span class="hljs-number">51</span>:<span class="hljs-number">06</span>] [debug] <span class="hljs-keyword">in</span>_stdin <span class="hljs-built_in">read</span>() = <span class="hljs-number">21</span>
-[<span class="hljs-number">0</span>] {<span class="hljs-string">&quot;key&quot;</span>=&gt;<span class="hljs-string">&quot;some value&quot;</span>}
-[<span class="hljs-number">1</span>] {<span class="hljs-string">&quot;key&quot;</span>=&gt;<span class="hljs-string">&quot;some value&quot;</span>}
-[<span class="hljs-number">2</span>] {<span class="hljs-string">&quot;key&quot;</span>=&gt;<span class="hljs-string">&quot;some value&quot;</span>}
-[<span class="hljs-number">3</span>] {<span class="hljs-string">&quot;key&quot;</span>=&gt;<span class="hljs-string">&quot;some value&quot;</span>}
-[<span class="hljs-number">4</span>] {<span class="hljs-string">&quot;key&quot;</span>=&gt;<span class="hljs-string">&quot;some value&quot;</span>}
+[<span class="hljs-number">2015</span>/<span class="hljs-number">09</span>/<span class="hljs-number">03</span> <span class="hljs-number">17</span>:<span class="hljs-number">34</span>:<span class="hljs-number">27</span>] [ info] Configuration
+ flush time     : <span class="hljs-number">5</span> seconds
+ input plugins  : stdin
+ collectors     :
+[<span class="hljs-number">2015</span>/<span class="hljs-number">09</span>/<span class="hljs-number">03</span> <span class="hljs-number">17</span>:<span class="hljs-number">34</span>:<span class="hljs-number">27</span>] [ info] starting engine
+[<span class="hljs-number">2015</span>/<span class="hljs-number">09</span>/<span class="hljs-number">03</span> <span class="hljs-number">17</span>:<span class="hljs-number">34</span>:<span class="hljs-number">27</span>] [debug] <span class="hljs-keyword">in</span>_stdin <span class="hljs-built_in">read</span>() = <span class="hljs-number">21</span>
+[<span class="hljs-number">2015</span>/<span class="hljs-number">09</span>/<span class="hljs-number">03</span> <span class="hljs-number">17</span>:<span class="hljs-number">34</span>:<span class="hljs-number">28</span>] [debug] <span class="hljs-keyword">in</span>_stdin <span class="hljs-built_in">read</span>() = <span class="hljs-number">21</span>
+[<span class="hljs-number">2015</span>/<span class="hljs-number">09</span>/<span class="hljs-number">03</span> <span class="hljs-number">17</span>:<span class="hljs-number">34</span>:<span class="hljs-number">29</span>] [debug] <span class="hljs-keyword">in</span>_stdin <span class="hljs-built_in">read</span>() = <span class="hljs-number">21</span>
+[<span class="hljs-number">2015</span>/<span class="hljs-number">09</span>/<span class="hljs-number">03</span> <span class="hljs-number">17</span>:<span class="hljs-number">34</span>:<span class="hljs-number">30</span>] [debug] <span class="hljs-keyword">in</span>_stdin <span class="hljs-built_in">read</span>() = <span class="hljs-number">21</span>
+[<span class="hljs-number">2015</span>/<span class="hljs-number">09</span>/<span class="hljs-number">03</span> <span class="hljs-number">17</span>:<span class="hljs-number">34</span>:<span class="hljs-number">31</span>] [debug] <span class="hljs-keyword">in</span>_stdin <span class="hljs-built_in">read</span>() = <span class="hljs-number">21</span>
+[<span class="hljs-number">0</span>] [<span class="hljs-number">1441269267</span>, {<span class="hljs-string">&quot;key&quot;</span>=&gt;<span class="hljs-string">&quot;some value&quot;</span>}]
+[<span class="hljs-number">1</span>] [<span class="hljs-number">1441269268</span>, {<span class="hljs-string">&quot;key&quot;</span>=&gt;<span class="hljs-string">&quot;some value&quot;</span>}]
+[<span class="hljs-number">2</span>] [<span class="hljs-number">1441269269</span>, {<span class="hljs-string">&quot;key&quot;</span>=&gt;<span class="hljs-string">&quot;some value&quot;</span>}]
+[<span class="hljs-number">3</span>] [<span class="hljs-number">1441269270</span>, {<span class="hljs-string">&quot;key&quot;</span>=&gt;<span class="hljs-string">&quot;some value&quot;</span>}]
+[<span class="hljs-number">4</span>] [<span class="hljs-number">1441269271</span>, {<span class="hljs-string">&quot;key&quot;</span>=&gt;<span class="hljs-string">&quot;some value&quot;</span>}]
 </code></pre>
 
                     

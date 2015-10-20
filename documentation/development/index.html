@@ -26,7 +26,7 @@
     
     
     
-    <link rel="prev" href="../output/stdout.html" />
+    <link rel="prev" href="../output/td.html" />
     
 
         
@@ -34,7 +34,7 @@
     <body>
         
         
-    <div class="book" data-level="5" data-basepath=".." data-revision="Mon Aug 31 2015 21:32:52 GMT-0600 (CST)">
+    <div class="book" data-level="5" data-basepath=".." data-revision="Tue Oct 20 2015 16:04:41 GMT-0600 (CST)">
     
 
 <div class="book-summary">
@@ -368,6 +368,21 @@
             
         </li>
     
+        <li class="chapter " data-level="4.3" data-path="output/td.html">
+            
+                
+                    <a href="../output/td.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.3.</b>
+                        
+                        Treasure Data
+                    </a>
+                
+            
+            
+        </li>
+    
 
             </ul>
             
@@ -578,7 +593,7 @@
 <p>The first argument represents the configuration context created on step <em>#1</em>. The <em>data</em> argument is a buffer which references the data that you want to be processed, it expect that you pass a <strong>valid JSON</strong> message, it&apos;s recomendable that per call you don&apos;t pass a string larger than 64KB to avoid performance penalties. The third argument <em>len</em> indicate the amount of bytes to read from the <em>data</em> pointer reference, make sure that <em>len</em> is always a valid value.</p>
 <p>Upon successful completion it returns the number of bytes processed, otherwise it returns a negative value.</p>
 <h4 id="7-flb-lib-stop">7. flb_lib_stop</h4>
-<p>This function instruct the Engine to stop processing events and perform a cleanup of the internal data. Before to return it will force a data flush to the output plugin in question to avoid data loss, then the worker thread will be stopped. It prototype is the following:</p>
+<p>This function instruct the Engine to stop processing events and perform a cleanup of the internal data. Before to return it will force a data flush to the output plugin in question to avoid data loss, after 5 seconds the worker thread will be stopped. It prototype is the following:</p>
 <pre><code class="lang-C"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">flb_lib_stop</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> flb_config *config)</span></span>;
 </code></pre>
 <p>It only takes one argument which is the configuration context created on step <em>#1</em>.  Upon successful completion it returns zero, otherwise it returns a negative value.</p>
@@ -632,7 +647,7 @@
         </div>
 
         
-        <a href="../output/stdout.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Standard Output"><i class="fa fa-angle-left"></i></a>
+        <a href="../output/td.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Treasure Data"><i class="fa fa-angle-left"></i></a>
         
         
     </div>
